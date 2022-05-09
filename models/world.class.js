@@ -1,24 +1,10 @@
 class World {
     character = new Character();
-    enemies = [
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-    ];
-    clouds = [
-        new Cloud()
-    ]
-
-    backgroundObjects = [
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 0),
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 0),
-        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/1.png', 0),
-        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/1.png', 0)
-    ]
-
+    level = level1;
     ctx;
     canvas;
     keyboard;
+    camera_x = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -39,12 +25,14 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.addObjectToMap(this.backgroundObjects);
+        this.ctx.translate(this.camera_x, 0);
+
+        this.addObjectToMap(this.level.backgroundObjects);
         this.addToMap(this.character);
-        this.addObjectToMap(this.clouds);
-        this.addObjectToMap(this.enemies);
+        this.addObjectToMap(this.level.clouds);
+        this.addObjectToMap(this.level.enemies);
 
-
+        this.ctx.translate(-this.camera_x, 0);
 
 
 
@@ -62,6 +50,16 @@ class World {
     }
 
     addToMap(mo) {
+        if (mo.otherDirection) {
+            this.ctx.save();
+            this.ctx.translate(mo.width, 0);
+            this.ctx.scale(-1, 1);
+            mo.x = mo.x * -1;
+        }
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        if (mo.otherDirection) {
+            mo.x = mo.x * -1;
+            this.ctx.restore();
+        }
     }
 }
