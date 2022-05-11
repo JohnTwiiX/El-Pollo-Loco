@@ -22,7 +22,21 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-38.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-39.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-40.png',
-    ]
+    ];
+    IMAGES_DEAD = [
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-51.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-52.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-53.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-54.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-55.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-57.png',
+    ];
+    IMAGES_HURT = [
+        'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-41.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-42.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-43.png',
+    ];
     world;
     walking_sound = new Audio('audio/walking.mp3')
 
@@ -32,6 +46,8 @@ class Character extends MovableObject {
         super().loadImage('img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.animate();
         this.applyGravity();
     }
@@ -39,10 +55,22 @@ class Character extends MovableObject {
     animate() {
         setInterval(() => {
             this.walking_sound.pause();
-            this.pressRight();
-            this.pressLeft();
-            this.pressSpace();
+            if (this.pressRightBtn()) {
+                this.pressRight();
+            }
+            if (this.pressLeftBtn()) {
+                this.pressLeft();
+            }
+            if (this.pressSpaceBtn()) {
+                this.pressSpace();
+            }
             this.world.camera_x = -this.x + 100;
+            if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+            }
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+            }
         }, 5000 / 60)
     }
 
