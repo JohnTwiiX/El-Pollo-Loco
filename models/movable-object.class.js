@@ -44,19 +44,17 @@ class MovableObject {
             this.energy = 0;
         } else {
             this.lastHit = new Date().setTime(); // Zeit in Zahlenform
-            console.log(lastHit);
         }
     }
 
     isHurt() {
         let timepassed = new Date().setTime() - this.lastHit; // difference in msec
         timepassed = timepassed / 1000; // difference in sec
-
         return timepassed < 1; // make true
     }
 
     isDead() {
-        this.energy = 0;
+        return this.energy == 0;
     }
 
     /**
