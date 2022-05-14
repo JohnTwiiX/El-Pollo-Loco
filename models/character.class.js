@@ -61,9 +61,7 @@ class Character extends MovableObject {
             if (this.pressLeftBtn()) {
                 this.pressLeft();
             }
-            if (this.pressSpaceBtn()) {
-                this.pressSpace();
-            }
+            this.pressSpace();
             this.world.camera_x = -this.x + 100;
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
@@ -109,7 +107,7 @@ class Character extends MovableObject {
 
     pressSpace() {
         if (this.isAboveGround()) {
-            this.jumpAnimation();
+            this.playAnimation(this.IMAGES_JUMPING);
         }
         if (this.pressSpaceBtn()) {
             this.jump();
@@ -120,9 +118,7 @@ class Character extends MovableObject {
         return this.world.keyboard.SPACE && !this.isAboveGround();
     }
 
-    jumpAnimation() {
-        this.playAnimation(this.IMAGES_JUMPING);
-    }
+
 
 
 
