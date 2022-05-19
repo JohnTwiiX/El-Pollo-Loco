@@ -10,11 +10,11 @@ function initLevel() {
         ], [
             new Cloud()
         ], [
-            new Coin(20),
-            new Coin(30),
-            new Coin(40),
-            new Coin(50),
-            new Coin(50),
+            new Coin(400, 350),
+            new Coin(450, 300),
+            new Coin(500, 250),
+            new Coin(550, 300),
+            new Coin(600, 350),
         ], [
             new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', -719),
             new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', -719),
