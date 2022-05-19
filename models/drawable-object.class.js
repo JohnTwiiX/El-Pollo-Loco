@@ -9,6 +9,7 @@ class DrawableObject {
 
 
 
+
     loadImage(path) {
         this.img = new Image(); // this.img = document.getelementbyid('image') <img id="image">
         this.img.src = path;
@@ -32,11 +33,11 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        // Red rectangle
+        // Red rectangle (now transparent)
         if (this instanceof Character || this instanceof Chicken) {
             ctx.beginPath();
             ctx.lineWidth = "6";
-            ctx.strokeStyle = "red";
+            ctx.strokeStyle = "transparent";
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }

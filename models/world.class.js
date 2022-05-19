@@ -8,6 +8,7 @@ class World {
     statusBar = new StatusBar;
     throwableObjects = [];
 
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -57,6 +58,7 @@ class World {
         this.addToMap(this.character);
         this.addObjectToMap(this.level.clouds);
         this.addObjectToMap(this.level.enemies);
+        this.addObjectToMap(this.level.coins);
         this.addObjectToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);

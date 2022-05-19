@@ -15,7 +15,7 @@ function startGame() {
     startBtn.style = 'display: none;';
     initLevel();
     init();
-
+    // preloadImages();
 }
 
 function init() {
