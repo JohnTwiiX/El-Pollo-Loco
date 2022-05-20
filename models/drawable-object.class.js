@@ -4,7 +4,7 @@ class DrawableObject {
     currentImage = 0;
     x = 120;
     y = 280;
-    height = 150;
+    height = 10;
     width = 100;
 
 
@@ -34,13 +34,38 @@ class DrawableObject {
 
     drawFrame(ctx) {
         // Red rectangle (now transparent)
-        if (this instanceof Character || this instanceof Chicken) {
+        if (this instanceof Character) {
             ctx.beginPath();
             ctx.lineWidth = "6";
-            ctx.strokeStyle = "transparent";
+            ctx.strokeStyle = "red";
+            ctx.rect(this.x + 30, this.y + 150, this.width - 70, this.height - 160);
+            ctx.stroke();
+        }
+        if (this instanceof Chicken) {
+            ctx.beginPath();
+            ctx.lineWidth = "6";
+            ctx.strokeStyle = "red";
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
+        if (this instanceof Coin) {
+            ctx.beginPath();
+            ctx.lineWidth = "6";
+            ctx.strokeStyle = "red";
+            ctx.rect(this.x + 30, this.y + 30, this.width - 60, this.height - 60);
+            ctx.stroke();
+        }
+    }
 
+    rectForInstanceof() {
+        if (this instanceof Character) {
+            return;
+        }
+        if (this instanceof Chicken) {
+            return;
+        }
+        if (this instanceof Coin) {
+            return;
+        }
     }
 }
