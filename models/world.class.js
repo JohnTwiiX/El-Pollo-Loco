@@ -39,8 +39,12 @@ class World {
         });
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin)) {
-                this.level.coin.splice();
-                this.statusBar.setPercentage(this.character.energy);
+                for (let i = 0; i < this.level.coins.length; i++) {
+                    console.log('coin eingesammelt');
+
+
+                }
+
             }
         });
     }

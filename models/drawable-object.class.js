@@ -35,6 +35,7 @@ class DrawableObject {
     drawFrame(ctx) {
         // Red rectangle (now transparent)
         if (this instanceof Character) {
+
             ctx.beginPath();
             ctx.lineWidth = "6";
             ctx.strokeStyle = "red";
@@ -44,8 +45,15 @@ class DrawableObject {
         if (this instanceof Chicken) {
             ctx.beginPath();
             ctx.lineWidth = "6";
-            ctx.strokeStyle = "red";
+            ctx.strokeStyle = "transparent";
             ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
+        if (this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = "6";
+            ctx.strokeStyle = "transparent";
+            ctx.rect(this.x, this.y + 100, this.width, this.height - 120);
             ctx.stroke();
         }
         if (this instanceof Coin) {
@@ -57,15 +65,15 @@ class DrawableObject {
         }
     }
 
-    rectForInstanceof() {
-        if (this instanceof Character) {
-            return;
-        }
-        if (this instanceof Chicken) {
-            return;
-        }
-        if (this instanceof Coin) {
-            return;
-        }
-    }
+    // rectForInstanceof() {
+    //     if (this instanceof Character) {
+    //         return;
+    //     }
+    //     if (this instanceof Chicken) {
+    //         return;
+    //     }
+    //     if (this instanceof Coin) {
+    //         return;
+    //     }
+    // }
 }

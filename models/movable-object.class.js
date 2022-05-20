@@ -26,12 +26,13 @@ class MovableObject extends DrawableObject {
     }
 
 
-
+    // Wir geben hier der Hitbox eine Größe, diese gilt nur für den Character
     isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + this.height
+        return this.x + 30 + this.width - 70 > mo.x &&
+            this.y + 150 + this.height - 160 > mo.y &&
+            this.x - 50 < mo.x &&
+            this.y + 150 < mo.y + this.height - 160
+
     }
 
     hit() {
