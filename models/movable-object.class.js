@@ -34,11 +34,11 @@ class MovableObject extends DrawableObject {
 
     // Wir geben hier der Hitbox eine Größe, diese gilt nur für den Character
     isColliding(mo) {
-        // return this.isIntersectingX(mo) && this.isIntersectingY(mo);
-        return this.getRightPos() > mo.x &&
-            this.getBottomPos() > mo.y &&
-            this.getLeftPos() < mo.x &&
-            this.getTopPos() < mo.y + this.height
+        return this.isIntersectingX(mo) && this.isIntersectingY(mo);
+        // return this.getRightPos() > mo.x &&
+        //     this.getBottomPos() > mo.y &&
+        //     this.getLeftPos() < mo.x &&
+        //     this.getTopPos() < mo.y + this.height
     }
 
     isIntersectingX(mo) {
