@@ -6,6 +6,12 @@ class MovableObject extends DrawableObject {
     acceleration = 2.5;
     energy = 100;
     lastHit = 0;
+    offset = {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+    }
 
     applyGravity() {
         setInterval(() => {
@@ -28,11 +34,51 @@ class MovableObject extends DrawableObject {
 
     // Wir geben hier der Hitbox eine Größe, diese gilt nur für den Character
     isColliding(mo) {
-        return this.x + 30 + this.width - 70 > mo.x &&
-            this.y + 150 + this.height - 160 > mo.y &&
-            this.x - 50 < mo.x &&
-            this.y + 150 < mo.y + this.height - 160
+        // return this.isIntersectingX(mo) && this.isIntersectingY(mo);
+        return this.getRightPos() > mo.x &&
+            this.getBottomPos() > mo.y &&
+            this.getLeftPos() < mo.x &&
+            this.getTopPos() < mo.y + this.height
+    }
 
+    isIntersectingX(mo) {
+        return !(this.isLeftSide(mo) || this.isRightSide(mo));
+    }
+
+    isIntersectingY(mo) {
+        return !(this.isAbove(mo) || this.isBelow(mo));
+    }
+
+    isLeftSide(mo) {
+        return !(this.getRightPos() > mo.getLeftPos());
+    }
+
+    isRightSide(mo) {
+        return !(this.getLeftPos() < mo.getRightPos());
+    }
+
+    isAbove(mo) {
+        return !(this.getBottomPos() > mo.getTopPos());
+    }
+
+    isBelow(mo) {
+        return !(this.getTopPos() < mo.getBottomPos());
+    }
+
+    getTopPos() {
+        return this.y + this.offset.top;
+    }
+
+    getRightPos() {
+        return this.x + this.width - this.offset.right;
+    }
+
+    getBottomPos() {
+        return this.y + this.height - this.offset.bottom;
+    }
+
+    getLeftPos() {
+        return this.x + this.offset.left;
     }
 
     hit() {
