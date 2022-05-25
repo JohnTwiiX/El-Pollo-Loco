@@ -1,47 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Pollo Loco</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
 
-    <script src='models/drawable-object.class.js'></script>
-    <script src='models/movable-object.class.js'></script>
-    <script src='models/character.class.js'></script>
-    <script src='models/chicken.class.js'></script>
-    <script src='models/clouds.class.js'></script>
-    <script src='models/coins.class.js'></script>
-    <script src='models/status-bar.class.js'></script>
-    <script src='models/world.class.js'></script>
-    <script src='models/background-object.class.js'></script>
-    <script src='models/keyboard.class.js'></script>
-    <script src='models/level.class.js'></script>
-    <script src='models/throwable-object.class.js'></script>
-    <script src='models/endboss.class.js'></script>
-    <script src='levels/level1.js'></script>
-    <script src='js/game.js'></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="./models/drawableObject.class.js"></script>
+    <script src="./models/movableObject.class.js"></script>
+    <script src="./models/throwableObject.class.js"></script>
+    <script src="./models/healthbar.class.js"></script>
+    <script src="./models/bossHealthbar.class.js"></script>
+    <script src="./models/bottlecounter.class.js"></script>
+    <script src="./models/coincounter.class.js"></script>
+    <script src="./models/backgroundObject.class.js"></script>
+    <script src="./models/collectableObject.class.js"></script>
+    <script src="./models/clouds.class.js"></script>
+    <script src="./models/character.class.js"></script>
+    <script src="./models/chicken.class.js"></script>
+    <script src="./models/endboss.class.js"></script>
+    <script src="./models/littleChicken.class.js"></script>
+    <script src="./models/keyboard.class.js"></script>
+    <script src="./models/level.class.js"></script>
+    <script src="./levels/level1.js"></script>
+
+    <script src="./models/world.class.js"></script>
+
+    <script src="./js/game.js"></script>
+
+
+
 </head>
 
-<body onload="">
-    <!-- <h1>El Pollo Loco</h1> -->
-    <div>
-        <div id="startScreen" class="start-screen">
-            <div><img src="img/9.Intro _ Outro Image/Start Screen/Opción2.png"></div>
-            <button id="startBtn" onclick="startGame()" class="start-btn">START</button>
+<body onload="init()">
+
+    <div class="game-container">
+        <div class="top-bar">
+            <button id="controls" onclick="showControlDescription()">Controls</button>
+            <div class="button-bar">
+                <button id="startButton" class="gameButton" onclick="startGame()">Start</button>
+                <button id="stopButton" class="gameButton d-none" onclick="world.stopGame()">Stop</button>
+                <button id="resumeButton" class="gameButton d-none" onclick="world.resumeGame()">Resume</button>
+                <div id="win-text" class="result-text d-none">CONGRATULATIONS</div>
+                <div id="lose-text" class="result-text d-none">GAME OVER</div>
+            </div>
         </div>
-        <canvas id="canvas" width="720" height="480"></canvas>
+
+
+        <img id="startScreen" src="img/Screens/Start-Screen-2.png">
+
+        <canvas id="canvas" width="960" height="540"></canvas>
+
+        <img id="gameWon" class="gameResult" src="img/Screens/win.png">
+        <img id="gameOver" class="gameResult" src="img/Screens/2.oh no you lost!.png">
+        <button id="restartButton" class="restart" onclick="world.restartGame()">RESTART GAME</button>
+
+
+
+
+        <div id="control-description" class="control-description show-description">
+            <img src="img/Screens/key-left.png"><span>Move Left</span>
+            <img src="img/Screens/key-up.png"><span>Jump</span>
+            <img src="img/Screens/key-right.png"><span>Move Right</span>
+            <div class="space-button">SPACE<img src="img/Screens/space.png"></div><span>Throw Bottle</span>
+            <img src="img/Screens/return.png"><span>Pause</span>
+
+        </div>
+
+        <div id="panel">
+            <div id="panel-left">
+                <img id="btnLeft" src="img/Screens/arrow.png">
+                <img id="btnRight" src="img/Screens/arrow.png">
+            </div>
+            <div id="panel-right">
+                <img id="btnThrow" src="img/Screens/throw-arrow.png">
+                <img id="btnJump" src="img/Screens/arrow.png">
+            </div>
+        </div>
+
+        <button id="startButton2" class="gameButton" onclick="startGame()">Start</button>
+
     </div>
-    <div>
-        ARROW LEFT = LEFT, ARROW RIGHT = RIGHT, SPACE = JUMP
+
+    <div class="icon-credits">
+        <a target="_blank" href="impressum.html">Impressum</a>
     </div>
-
-
-
-
-
 
 </body>
 

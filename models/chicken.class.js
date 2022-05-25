@@ -1,30 +1,82 @@
 class Chicken extends MovableObject {
-    height = 80;
-    width = 80;
-    y = 350;
-    IMAGES_WALKING = [
-        'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png',
-        'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/2-Ga_centro.png',
-        'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/3.Ga_paso izquierdo.png'
-    ];
 
-    constructor() {
-        super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');
+    y = 380;
+    height = 100;
+    width = 100;
+    world;
+
+    kickOutChickens = false;
+
+
+    IMAGES_WALKING = [
+        'img/Chicken/W-1.png',
+        'img/Chicken/W-2.png',
+        'img/Chicken/W-3.png'
+    ]
+
+    IMAGE_DEAD = ['img/Chicken/D-1.png']
+
+    constructor(x) {
+        super();
+        this.loadImage('img/Chicken/W-1.png');
         this.loadImages(this.IMAGES_WALKING);
-        this.x = 200 + Math.random() * 500; //Zahl zwischen 200 und 700
-        this.speed = 0.1 + Math.random() * 0.3;
+        this.loadImages(this.IMAGE_DEAD);
+        this.x = x;
+        this.mustWalk = true;
+        /*
         this.animate();
+        this.startMoving();*/
     }
 
     animate() {
-        setInterval(() => {
-            this.moveLeft();
-        }, 1000 / 60);
-
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
-        }, 200)
-
+        this.animationTimer = setInterval(() => {
+            if(this.isDead){
+                this.playAnimation(this.IMAGE_DEAD);
+            }
+            else if(this.mustWalk){
+                this.playAnimation(this.IMAGES_WALKING);
+            }
+        }, 120);
     }
 
+    startMoving() {
+        this.movementTimer = setInterval(() => {
+            if(this.isDead){
+                this.moveObjects(0);
+            }
+            else if(this.mustWalk){
+                this.moveObjects(1.5);    
+            }
+        }, 1000 / 60);
+    }
+
+    kickedOut() {
+        if(!this.kickOutChickens) {
+            this.kickOutChickens = true;
+            this.mustWalk = false;
+            this.applyGravity();
+            this.speedY = 18;
+            setInterval(() => {
+                this.x += 7;
+            }, 1000 / 60);
+            setTimeout(() => {
+                this.removeChicken()
+            }, 1500);
+        }
+    }
+
+    removeChicken(){
+        let i = this.world.level.chicken.indexOf(this);
+        this.world.level.chicken.splice(i, 1);
+    }
+
+    startChicken() {
+        this.animate();
+        this.startMoving();
+    }
+
+    stopChicken() {
+        clearInterval(this.animationTimer);
+        clearInterval(this.movementTimer);
+    }
 }

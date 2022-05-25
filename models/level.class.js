@@ -1,14 +1,21 @@
 class Level {
-    enemies;
-    clouds;
-    backgroundObjects;
-    coins;
-    level_end_x = 2200;
 
-    constructor(enemies, clouds, coins, backgroundObjects) { // Auf die richtige Reihenfolge achten 
-        this.enemies = enemies;
-        this.clouds = clouds;
-        this.coins = coins;
+    chicken;
+    boss;
+    backgroundObjects;
+    clouds
+    bottles;
+    coins;
+    health;
+
+
+    constructor(chicken, boss, backgroundObjects, clouds, bottles, coins, health) {
+        this.chicken = chicken;
+        this.boss = boss;
         this.backgroundObjects = backgroundObjects;
+        this.clouds = clouds;
+        this.bottles = bottles;
+        this.coins = coins;
+        this.health = health;        
     }
 }
